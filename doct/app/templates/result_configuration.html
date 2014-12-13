@@ -1,13 +1,18 @@
-
 {% extends 'template_base.html' %}
 
 {% block content %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/download.js"></script>
+    <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <!--<div class="clearfix"></div>-->
+                <script type="text/javascript" src="{{ STATIC_URL }}js/download.js"></script>
 
-    <h1>Script to execute</h1>
-    <textarea rows="20" cols="150" id="script">{{ script }}</textarea>
-        <br/>
-    <button onclick="saveTextAsFile()">Download file</button>
-    <a href="/list/">List tasks</a>
+                <h2>Script to execute</h2>
+                <textarea rows="20" cols="150" id="script">{{ script }}</textarea>
+                    <br/>
+                <button onclick="saveTextAsFile()">Download file</button>
+                <br/>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
-
