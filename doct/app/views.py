@@ -98,13 +98,17 @@ def getStatForTask(task):
         return None
 
     if tables_xml.status_code == 200:
-        xml_doc = minidom.parseString(tables_xml.content)
-        timestamp = xml_doc.getElementsByTagName('update_time')[0].childNodes[0].data
-        stat.update_time = datetime.fromtimestamp(float(timestamp))
-        stat.number_user = xml_doc.getElementsByTagName('nusers_total')[0].childNodes[0].data
-        stat.number_team = xml_doc.getElementsByTagName('nteams_total')[0].childNodes[0].data
-        stat.number_host = xml_doc.getElementsByTagName('nhosts_total')[0].childNodes[0].data
-        stat.total_credit = xml_doc.getElementsByTagName('total_credit')[0].childNodes[0].data
+        try:
+            xml_doc = minidom.parseString(tables_xml.content)
+            timestamp = xml_doc.getElementsByTagName('update_time')[0].childNodes[0].data
+            stat.update_time = datetime.fromtimestamp(float(timestamp))
+            stat.number_users = xml_doc.getElementsByTagName('nusers_total')[0].childNodes[0].data
+            stat.number_teams = xml_doc.getElementsByTagName('nteams_total')[0].childNodes[0].data
+            stat.number_hosts = xml_doc.getElementsByTagName('nhosts_total')[0].childNodes[0].data
+            stat.total_credit = xml_doc.getElementsByTagName('total_credit')[0].childNodes[0].data
+        except:
+            print "Error parsing"
+            return None
     else:
         print "Can't fetch stats"
         return None
