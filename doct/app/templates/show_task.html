@@ -1,13 +1,30 @@
 
 {% extends 'template_base.html' %}
 
-{% block content %}
-    <h1>New post</h1>
-    <p>{{ task.title }}</p>
-    <p>Update time: {{ stat.update_time }}</p><br/>
-    <p>Number users: {{ stat.number_users }}</p><br/>
-    <p>Number teams: {{ stat.number_teams }}</p><br/>
-    <p>Number hosts: {{ stat.number_hosts }}</p><br/>
-    <p>Total credit: {{ stat.total_credit }}</p><br/>
-    <a href="/list/">List tasks</a>
+{% endblock content %}
+    <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <h2 class="col-lg-8"><a href="{{ task.link }}">{{ task.title }}</a></h3>
+                <div class="col-lg-4" style="margin-bottom: 3px;">
+                    <a  href="/contribute/{{task.pk}}"
+                            class="btn btn-default btn-small mbutton"
+                            style="margin-top: 14px;">
+                        <span class="network-name">
+                            Contribute
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <p> {{ task.description|safe }}</p>
+            </div>
+            <p>Update time: {{ stat.update_time }}</p><br/>
+            <p>Number users: {{ stat.number_users }}</p><br/>
+            <p>Number teams: {{ stat.number_teams }}</p><br/>
+            <p>Number hosts: {{ stat.number_hosts }}</p><br/>
+            <p>Total credit: {{ stat.total_credit }}</p><br/>
+        </div>
+    </div>
 {% endblock content %}

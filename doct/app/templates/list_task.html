@@ -5,25 +5,23 @@
     <div class="content-section-a">
         <div class="container">
             <div class="row">
-                <!--<div class="clearfix"></div>-->
                 <h2> Task List </h2>
                 {% for task in tasks %}
                     <div class="row">
                         <h3 class="col-lg-8"><a href="/task/{{task.pk}}">{{ task.title }}</a></h3>
                         <div class="col-lg-4" style="margin-bottom: 3px;">
-                            <a  href="/contribute/{{task.pk}}" class="btn btn-default btn-small mbutton" style="margin-top: 14px;"> 
+                            <a  href="/contribute/{{task.pk}}"
+                                    class="btn btn-default btn-small mbutton"
+                                    style="margin-top: 14px;">
                                 <span class="network-name">
                                     Contribute
                                 </span>
                             </a>
                         </div>
-                        <br/>
                     </div>
-                    <p> {{ task.description|safe }}</p>
-                    <br/>
-                {% endfor %}
-                <br/>
-            </div>
+                    <p> {{ task.description|truncatewords:14|slice:"-4"|safe }}... </p>
+            {% endfor %}
         </div>
     </div>
+</div>
 {% endblock content %}
