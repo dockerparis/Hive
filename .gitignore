@@ -46,9 +46,3 @@ coverage.xml
 *.log
 *.pot
 
-settings.py
-
-# Sphinx documentation
-doc/_build/
-social/socialClub/settings.py
-.elasticbeanstalk/
