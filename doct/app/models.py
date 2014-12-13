@@ -14,6 +14,10 @@ class Task(models.Model):
         verbose_name_plural = "Tasks"
 
 
+class StatTask(models.Model):
+    pass
+
+
 class Contribute(models.Model):
     ram = models.PositiveIntegerField(default=1024, verbose_name='RAM')
     cpu = models.PositiveIntegerField(default=2, verbose_name='CPU (number of core)')
@@ -21,5 +25,7 @@ class Contribute(models.Model):
     disk_space = models.IntegerField(default=1024, verbose_name='Disk pace (Mo)')
     # email = models.CharField()
     # password = models.CharField()
+
+
 
 
