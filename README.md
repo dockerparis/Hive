@@ -19,4 +19,5 @@
 ### Who do I talk to? ###
 
 Victor Boudon <vctr@gmail.com>
+
 Gary Laurenceau <gary.laurenceau@gmail.com>
