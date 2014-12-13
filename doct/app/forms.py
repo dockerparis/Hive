@@ -3,6 +3,7 @@ from doct.app.models import Task, Contribute
 
 
 class TaskForm(forms.ModelForm):
+    description = forms.CharField( widget=forms.Textarea )
     class Meta:
         model = Task
         fields = ['title', 'description', 'link']
