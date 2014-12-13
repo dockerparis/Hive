@@ -47,10 +47,12 @@ def contribute_task(request, pk=None):
         if request.method == "POST":
             form = ContributeForm(request.POST)
             if form.is_valid():
-                script = docker.generate_configuration(ram=form.cleaned_data['ram'],
-                                              cpu=form.cleaned_data['cpu'],
-                                              gpu=form.cleaned_data['gpu'],
-                                              disk_space=form.cleaned_data['disk_space'])
+                script = docker.generate_configuration(
+                                            link=task.link,
+                                            ram=form.cleaned_data['ram'],
+                                            cpu=form.cleaned_data['cpu'],
+                                            gpu=form.cleaned_data['gpu'],
+                                            disk_space=form.cleaned_data['disk_space'])
 
                 return render(request, 'result_configuration.html', {'script': script})
         else:

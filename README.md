@@ -18,6 +18,6 @@
 
 ### Who do I talk to? ###
 
-Victor Boudon <vctr@gmail.com>
+Victor Boudon <vctrhb@gmail.com>
 
 Gary Laurenceau <gary.laurenceau@gmail.com>
