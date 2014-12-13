@@ -15,7 +15,13 @@ class Task(models.Model):
 
 
 class StatTask(models.Model):
-    pass
+    task = models.OneToOneField(Task)
+    update_time = models.DateTimeField(auto_now=False)
+    number_users = models.IntegerField(default=0)
+    number_teams = models.IntegerField(default=0)
+    number_host = models.IntegerField(default=0)
+    total_credit = models.FloatField(default=0)
+    update_time_db = models.DateTimeField(auto_now=True)
 
 
 class Contribute(models.Model):

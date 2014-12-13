@@ -1,10 +1,15 @@
 from django.shortcuts import render
-from doct.app.models import Task
+from doct.app.models import Task, StatTask
 from doct.app.forms import TaskForm, ContributeForm
 
 from django.http import HttpResponseRedirect
 
 from doct.utils import docker
+
+# to get and parse stat
+import requests
+from xml.dom import minidom
+from datetime import datetime, timedelta
 
 def home(request):
     return render(request, 'home.html')
@@ -17,7 +22,8 @@ def show_task(request, pk=None):
         task = Task.objects.get(id=pk)
     except:
         return HttpResponseRedirect("/")
-    return render(request, 'show_task.html', {'task': task})
+    stat = getStatForTask(task)
+    return render(request, 'show_task.html', {'task': task, 'stat': stat})
 
 
 def update_task(request, pk=None):
@@ -68,5 +74,41 @@ def contribute_task(request, pk=None):
     except:
         return HttpResponseRedirect("/list/")
 
+
+def getStatForTask(task):
+    try:
+        stat = StatTask.objects.get(task=task)
+        if stat.update_time_db.replace(tzinfo=None) > datetime.now() - timedelta(hours=24):
+            return stat
+    except Exception, e:
+        print e
+        stat = None
+
+    if stat is None:
+        stat = StatTask()
+        stat.task = task
+        print "new task"
+    try:
+        link_xml = task.link
+        if task.link[:-1] is not '/':
+            link_xml += '/'
+        link_xml += 'stats/tables.xml'
+        tables_xml = requests.get(link_xml)
+    except:
+        return None
+
+    if tables_xml.status_code == 200:
+        xml_doc = minidom.parseString(tables_xml.content)
+        timestamp = xml_doc.getElementsByTagName('update_time')[0].childNodes[0].data
+        stat.update_time = datetime.fromtimestamp(float(timestamp))
+        stat.number_user = xml_doc.getElementsByTagName('nusers_total')[0].childNodes[0].data
+        stat.number_team = xml_doc.getElementsByTagName('nteams_total')[0].childNodes[0].data
+        stat.number_host = xml_doc.getElementsByTagName('nhosts_total')[0].childNodes[0].data
+        stat.total_credit = xml_doc.getElementsByTagName('total_credit')[0].childNodes[0].data
+    else:
+        print "Can't fetch stats"
+        return None
+    stat.save()
+    return stat
 
 

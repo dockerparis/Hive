@@ -4,5 +4,10 @@
 {% block content %}
     <h1>New post</h1>
     <p>{{ task.title }}</p>
+    <p>Update time: {{ stat.update_time }}</p><br/>
+    <p>Number users: {{ stat.number_user }}</p><br/>
+    <p>Number teams: {{ stat.number_team }}</p><br/>
+    <p>Number hosts: {{ stat.number_host }}</p><br/>
+    <p>Total credit: {{ stat.total_credit }}</p><br/>
     <a href="/list/">List tasks</a>
 {% endblock content %}
