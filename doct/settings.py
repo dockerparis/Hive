@@ -65,6 +65,10 @@ DATABASES = {
     }
 }
 
+FIXTURE_DIRS = (
+    '/doct/app/migrations/fixtures/',
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
