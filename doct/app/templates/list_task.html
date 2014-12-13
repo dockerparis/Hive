@@ -1,0 +1,18 @@
+
+{% extends 'template_base.html' %}
+
+{% block content %}
+    <h1>List Task</h1>
+        {% for task in tasks %}
+            <div>
+                <a href="/task/{{task.pk}}">{{ task.title }}</a>
+                <a href="/contribute/{{task.pk}}">Contribute</a>
+                <br/>
+                <p>Name:{{ task.name }}. Description: {{ task.description }}</p>
+            </div>
+        <br/>
+        {% endfor %}
+        <br/>
+<a href="/task/">New tasks</a>
+{% endblock content %}
+
