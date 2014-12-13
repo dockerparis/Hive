@@ -12,22 +12,28 @@ def home(request):
 def list_task(request):
     return render(request, 'list_task.html', {'tasks': Task.objects.all()})
 
-def update_task(request, pk=None):
-    if request.method == "POST":
+def show_task(request, pk=None):
+    try:
         task = Task.objects.get(id=pk)
+    except:
+        return HttpResponseRedirect("/")
+    return render(request, 'show_task.html', {'task': task})
+
+
+def update_task(request, pk=None):
+    try:
+        task = Task.objects.get(id=pk)
+    except:
+        return HttpResponseRedirect("/")
+    if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             task = form.save()
             task.save()
             return HttpResponseRedirect("/list/")
     elif pk is not None:
-        try:
-            task = Task.objects.get(id=pk)
-            form = TaskForm(instance=task)
-            return render(request, 'create_task.html', {'form': form})
-        except:
-            return HttpResponseRedirect("/")
-    return HttpResponseRedirect("/")
+        form = TaskForm(instance=task)
+        return render(request, 'create_task.html', {'form': form})
 
 def new_task(request):
     if request.method == "POST":
