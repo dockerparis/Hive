@@ -23,15 +23,19 @@ h6 {
 
 h1,
 h2 {
-    color:#777777;
+    color:#2ecc71;
 }
 
-/*#mbrand {*/
-    /*color:#f8f8f8;*/
-/*}*/
+#mbrand {
+    color:#2ecc71;
+}
+
+a {
+    color:#2ecc71;
+}
 
 .spacer {
-    background: #f8f8f8;
+    background: #2ecc71;
     width: 100px;
     height: 2px;
     margin: auto;
@@ -41,8 +45,8 @@ h2 {
 
 
 .mbutton{
-    background-color: #545454;
-    color: #f8f8f8;
+    background-color: #2ecc71;
+    color: #EEEEEE;
 }
 .lead {
     font-size: 18px;

@@ -35,7 +35,11 @@
             </div>
             <div style="width: 100%; text-align: center;">
                 {% for i in number_pages %}
-                    <a href="/list/{{i}}">{{i}}</a>
+                    {% if i == current_page %}
+                        <a href="/list/{{i}}" style="text-decoration: underline;">{{i}}</a>
+                    {% else %}
+                        <a href="/list/{{i}}">{{i}}</a>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

@@ -14,8 +14,12 @@ from datetime import datetime, timedelta
 # search task
 import json
 
+# trending project
+from django.db.models import Count
+
 def home(request):
-    return render(request, 'home.html')
+    trending_projects = StatTask.objects.annotate(Count('number_users')).order_by('number_users')[:3]
+    return render(request, 'home.html', {'trending_projects': trending_projects})
 
 def list_task(request, pk=None):
     if pk == None or pk <= 0:
@@ -23,7 +27,7 @@ def list_task(request, pk=None):
     else:
         pk = int(pk)
     tasks = Task.objects.all()
-    return render(request, 'list_task.html', {'tasks': tasks[(pk - 1) * 10: pk * 10], 'number_pages': range(1, tasks.count() / 10  + 1)})
+    return render(request, 'list_task.html', {'tasks': tasks[(pk - 1) * 10: pk * 10], 'current_page': pk, 'number_pages': range(1, tasks.count() / 10  + 1)})
 
 def show_task(request, pk=None):
     try:
