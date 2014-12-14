@@ -6,14 +6,14 @@
 * Django Open Calculation Tool
 * Version: 0.1
 
-Hive is a project that tries to help other project that need computation power.
+Hive is a project that tries to help other projects that need computation power.
 It's a web platform (http://vhb.io), that tries to make high performance cluster
 available to anyone.
-This project uses docker to run the computation program. This allow use to make
+This project uses docker to run the computation program. This allows to make
 the install process very simple and clean. Once the docker container is stopped,
-you environment is the same state than when you did launch it.
+your environment is in the same state than when you launched it.
 For now, we just handle Boinc project. But, if you want to make you own project
-available to, you just have to make a docker container, and register on our plateform.
+available too, you just have to make a docker container, and register on our plateform.
 
 Our project tries to cure diseases, study global warming, discover pulsars,
 and do many other types of scientific research. It's safe, secure, and easy.
