@@ -75,15 +75,17 @@ def contribute_task(request, pk=None):
                                             link=task.link,
                                             ram=form.cleaned_data['ram'],
                                             cpu=form.cleaned_data['cpu'],
-                                            gpu=form.cleaned_data['gpu'],
+                                            # gpu=form.cleaned_data['gpu'],
                                             disk_space=form.cleaned_data['disk_space'])
-
                 return render(request, 'result_configuration.html', {'script': script})
+            else:
+                return render(request, 'contribute_task.html', {'task': task, 'form': form})
         else:
             form = ContributeForm()
             return render(request, 'contribute_task.html', {'task': task, 'form': form})
 
-    except:
+    except Exception, e:
+        print e
         return HttpResponseRedirect("/list/")
 
 
@@ -99,7 +101,6 @@ def getStatForTask(task):
     if stat is None:
         stat = StatTask()
         stat.task = task
-        print "new task"
     try:
         link_xml = task.link
         if task.link[:-1] is not '/':
@@ -144,7 +145,6 @@ def search_task(request):
         else:
             data = 'fail'
         mimetype = 'application/json'
-        print 'data: ', data
         return HttpResponse(data, mimetype)
     except Exception, e:
         print e

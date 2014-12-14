@@ -37,13 +37,13 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-if test $# -eq 0; then
-    usage
-else
-    if test "$#" -ne 5 ; then
-        usage
-    fi
-fi
+#if test $# -eq 0; then
+#    usage
+#else
+#    if test "$#" -ne 5 ; then
+#        usage
+#    fi
+#fi
 
 cpu_count=$1
 cpu_shares=$2
@@ -66,8 +66,7 @@ done
 
 if ! type "losetup" > /dev/null; then
     echo "Warning losetup unavalaible: space disk will not be controlled"
-    docker run --cpu-share=$cpu_shares --cpus=$cpu_count \
-        $container_name $project_url
+    docker run --cpu-share=$cpu_shares --cpus=$cpu_count $container_name $project_url
 else
     echo $disk
     truncate --size $disk lvmtest0.img
@@ -83,5 +82,3 @@ else
     losetup -d /dev/loop8
     rm /dev/loop8
 fi
-
-

@@ -12,4 +12,4 @@ class TaskForm(forms.ModelForm):
 class ContributeForm(forms.ModelForm):
     class Meta:
         model = Contribute
-        fields = ['ram', 'cpu', 'gpu', 'disk_space']
+        fields = ['ram', 'cpu', 'disk_space']
