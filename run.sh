@@ -32,6 +32,11 @@ usage() {
     exit 1
 }
 
+if [ "$(id -u)" != "0" ]; then
+    echo "This script must be run as root" 1>&2
+    exit 1
+fi
+
 if test $# -eq 0; then
     usage
 else
@@ -40,50 +45,42 @@ else
     fi
 fi
 
-#if ! type "losetup" > /dev/null; then
-    #echo "losetup unavalaible: space disk will not be controlled"
-    #docker run --cpu-share=$cpu_shares --cpus=$cpu_count \
-        #$container_name $project_url
-#else
-    #echo $disk
-    #dd if=/dev/zero of=lvmtest0.img bs=1 count=$disk
-    #for i in {8..63}; do 
-        #if [ -e /dev/loop$i ];
-        #then
-            #continue; 
-        #fi;
-        #echo $i
-        #truncate --size $disk lvmtest0.img
-        #mknod /dev/loop$i b 7 $i;
-        #losetup lvmtest0.img
-        #chown --reference=/dev/loop0 /dev/loop$i;
-        #chmod --reference=/dev/loop0 /dev/loop$i; 
-        #sudo mkfs.ext4 /dev/loop$i
-        #sudo mount /dev/loop$i /var/lib/docker_boinc
-        #break;
-    #done
+cpu_count=$1
+cpu_shares=$2
+memory=$3
+disk=$4
+project_url=$5
+volume=/var/lib/docker_boinc
+container_name='test'
 
-    cpu_count=$1
-    cpu_shares=$2
-    memory=$3
-    disk=$4
-    project_url=$5
-    volume=/var/lib/docker_boinc
-    container_name='test'
+nb_cpu=$(nproc)
+cpu_option='0'
+i=1
+while [ $i -lt $nb_cpu ]; do
+    if [[ i -gt $cpu_count ]]; then
+        break
+    fi
+    cpu_option+=",$i"
+    i=$[$i+1]
+done
 
-    nb_cpu=$(nproc)
-    cpu_option='0'
-    i=1
-    while [ $i -lt $nb_cpu ]; do
-        if [[ i -gt $cpu_count ]]; then
-            break
-        fi
-        cpu_option+=",$i"
-        i=$[$i+1]
-    done
-    #echo $cpu_option
-    docker run -v $volume -c=$cpu_shares --cpuset=$cpu_option \
+if ! type "losetup" > /dev/null; then
+    echo "Warning losetup unavalaible: space disk will not be controlled"
+    docker run --cpu-share=$cpu_shares --cpus=$cpu_count \
         $container_name $project_url
-#fi
+else
+    echo $disk
+    truncate --size $disk lvmtest0.img
+    mknod /dev/loop8 b 7 8;
+    losetup /dev/loop8 lvmtest0.img
+    chown --reference=/dev/loop0 /dev/loop8
+    chmod --reference=/dev/loop0 /dev/loop8
+    sudo mkfs.ext4 /dev/loop8
+    mount /dev/loop8 /var/lib/docker_boinc
+    docker run -v /var/lib/docker_boinc/ -c=$cpu_shares --cpuset=$cpu_option \
+        $container_name $project_url
+    umount /dev/loop8
+    rm /dev/loop8
+fi
 
 

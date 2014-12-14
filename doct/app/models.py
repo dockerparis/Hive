@@ -3,8 +3,8 @@ from django.db import models
 
 class Task(models.Model):
     title = models.CharField(max_length=255, blank=False)
-    description = models.CharField(max_length=2048, blank=False)
     link = models.CharField(max_length=512, blank=False)
+    description = models.CharField(max_length=2048, blank=False)
     # key = models.CharField(max_length=512, blank=False)
 
     class Meta:

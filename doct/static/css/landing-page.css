@@ -21,9 +21,27 @@ h6 {
     font-weight: 700;
 }
 
+h1,
+h2 {
+    color:#2ecc71;
+}
+
+#mbrand {
+    color:#2ecc71;
+}
+
+.spacer {
+    background: #2ecc71;
+    width: 100px;
+    height: 2px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 
 .mbutton{
-    background-color: #666666;
+    background-color: #2ecc71;
     color: #EEEEEE;
 }
 .lead {
@@ -96,6 +114,7 @@ h6 {
 .content-section-a {
     padding: 50px 0;
     background-color: #f8f8f8;
+    /*height: 800px;*/
 }
 
 .content-section-b {
