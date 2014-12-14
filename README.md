@@ -21,6 +21,8 @@ and do many other types of scientific research. It's safe, secure, and easy.
 
 http://boinc.berkeley.edu
 
+Please report any bug by an issue.
+
 ### Dependencies
 
 You just need to have docker daemon up and running on your computer.
@@ -33,14 +35,14 @@ You can create your own container and submit it on hive.vhb.io/task/new/
 If you want to help us on the plateform development, just fork this project and make
  a pull request.
 
-To run the dev server, just to that :
+To run the dev server, just do that :
 
-* $> virtualenv env
-* $> source env/bin/activate
-* $> pip install -r requirements.txt
-* $> python manage.py syncdb
-* $> python manage.py loaddata doct/app/migrations/fixtures/tasks.json
-* $> python manage.py runserver
+    virtualenv env
+    source env/bin/activate
+    pip install -r requirements.txt
+    python manage.py syncdb
+    python manage.py loaddata doct/app/migrations/fixtures/tasks.json
+    python manage.py runserver
 
 ### Who do I talk to? ###
 
