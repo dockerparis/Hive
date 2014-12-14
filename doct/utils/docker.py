@@ -55,7 +55,7 @@ memory=%d
 disk=%dG
 project_url=%s
 volume=/var/lib/docker_boinc
-container_name='test'
+container_name='vctr/hiveboinc'
 
 nb_cpu=$(nproc)
 cpu_option='0'
