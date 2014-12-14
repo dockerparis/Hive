@@ -80,6 +80,7 @@ else
     docker run -v /var/lib/docker_boinc/ -c=$cpu_shares --cpuset=$cpu_option \
         $container_name $project_url
     umount /dev/loop8
+    losetup -d /dev/loop8
     rm /dev/loop8
 fi
 
