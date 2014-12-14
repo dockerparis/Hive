@@ -3,22 +3,46 @@
 
 ### Summary ###
 
-* Django Open Calcul Tool
+* Django Open Calculation Tool
 * Version: 0.1
 
+Hive is a project that tries to help other project that need computation power.
+It's a web platform (http://vhb.io), that tries to make high performance cluster
+available to anyone.
+This project uses docker to run the computation program. This allow use to make
+the install process very simple and clean. Once the docker container is stopped,
+you environment is the same state than when you did launch it.
+For now, we just handle Boinc project. But, if you want to make you own project
+available to, you just have to make a docker container, and register on our plateform.
 
-### How do I get set up? ###
+Our project tries to cure diseases, study global warming, discover pulsars,
+and do many other types of scientific research. It's safe, secure, and easy.
+(from Boinc).
+
+http://boinc.berkeley.edu
+
+### Dependencies
+
+You just need to have docker daemon up and running on your computer.
+https://www.docker.com
+
+### Want to contribute
+
+You can create your own container and submit it on hive.vhb.io/task/new/
+
+If you want to help us on the plateform development, just fork this project and make
+ a pull request.
+
+To run the dev server, just to that :
 
 * $> virtualenv env
-* source env/bin/activate
-* pip install -r requirements.txt
+* $> source env/bin/activate
+* $> pip install -r requirements.txt
 * $> python manage.py syncdb
 * $> python manage.py loaddata doct/app/migrations/fixtures/tasks.json
 * $> python manage.py runserver
 
-
 ### Who do I talk to? ###
 
 Victor Boudon <vctrhb@gmail.com>
-
 Gary Laurenceau <gary.laurenceau@gmail.com>
