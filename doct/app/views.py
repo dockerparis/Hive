@@ -2,7 +2,7 @@ from django.shortcuts import render
 from doct.app.models import Task, StatTask
 from doct.app.forms import TaskForm, ContributeForm
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from doct.utils import docker
 
@@ -10,6 +10,9 @@ from doct.utils import docker
 import requests
 from xml.dom import minidom
 from datetime import datetime, timedelta
+
+# search task
+import json
 
 def home(request):
     return render(request, 'home.html')
@@ -20,7 +23,7 @@ def list_task(request, pk=None):
     else:
         pk = int(pk)
     tasks = Task.objects.all()
-    return render(request, 'list_task.html', {'tasks': tasks[(pk - 1) * 10: pk * 10], 'number_pages': range(1, tasks.count() / 10 )})
+    return render(request, 'list_task.html', {'tasks': tasks[(pk - 1) * 10: pk * 10], 'number_pages': range(1, tasks.count() / 10  + 1)})
 
 def show_task(request, pk=None):
     try:
@@ -121,3 +124,23 @@ def getStatForTask(task):
     return stat
 
 
+def search_task(request):
+    try:
+        if request.is_ajax():
+            q = request.GET.get('term', '')
+            tasks = Task.objects.filter(title__contains = q )[:20]
+            results = []
+            for task in tasks:
+                task_json = {}
+                task_json['id'] = task.id
+                task_json['label'] = task.title
+                task_json['value'] = task.link
+                results.append(task_json)
+            data = json.dumps(results)
+        else:
+            data = 'fail'
+        mimetype = 'application/json'
+        print 'data: ', data
+        return HttpResponse(data, mimetype)
+    except Exception, e:
+        print e

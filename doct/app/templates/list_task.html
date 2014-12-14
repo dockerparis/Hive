@@ -5,14 +5,25 @@
     <div class="content-section-a">
         <div class="container">
             <div class="row">
-                <h2> Task List </h2>
+                <div class="col-lg-8">
+                    <h2> Task List </h2>
+                </div>
+
+                <!--Search box-->
+                <div class="col-lg-4" style="margin-bottom: 3px;">
+                    <div class="ui-widget" style="margin-top:30px; height: 30px;">
+                      <input id="tasks_searck">
+                    </div>
+                </div>
+                </div>
+
                 {% for task in tasks %}
                     <div class="row">
                         <h3 class="col-lg-8"><a href="/task/{{task.pk}}">{{ task.title }}</a></h3>
-                        <div class="col-lg-4" style="margin-bottom: 3px;">
+                        <div class="col-lg-4" style="margin-bottom: 3px">
                             <a  href="/contribute/{{task.pk}}"
                                     class="btn btn-default btn-small mbutton"
-                                    style="margin-top: 14px;">
+                                    style="margin-top: 14px; margin-left: 64px;">
                                 <span class="network-name">
                                     Contribute
                                 </span>

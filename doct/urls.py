@@ -13,4 +13,6 @@ urlpatterns = patterns('',
     url(r'^list/$', RedirectView.as_view(url='/list/1', permanent=False), name='index'),
     url(r'^list/(?P<pk>[0-9]+)$', views.list_task, name='list_task'),
     url(r'^contribute/(?P<pk>[0-9]+)/$', views.contribute_task, name='contribute_task'),
+    url(r'^search/task/', views.search_task, name='search_task'),
+
 )
