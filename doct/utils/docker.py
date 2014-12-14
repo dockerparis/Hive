@@ -72,7 +72,6 @@ if ! type "losetup" > /dev/null; then
     echo "Warning losetup unavalaible: space disk will not be controlled"
     docker run --cpu-share=$cpu_shares --cpus=$cpu_count $container_name $project_url
 else
-    echo $disk
     truncate --size $disk lvmtest0.img
     mknod /dev/loop8 b 7 8;
     losetup /dev/loop8 lvmtest0.img
@@ -81,7 +80,7 @@ else
     sudo mkfs.ext4 /dev/loop8
     mount /dev/loop8 /var/lib/docker_boinc
     docker run -v /var/lib/docker_boinc/ -c=$cpu_shares --cpuset=$cpu_option \
-        $container_name $project_url
+       -i -t $container_name $project_url
     umount /dev/loop8
     losetup -d /dev/loop8
     rm /dev/loop8
