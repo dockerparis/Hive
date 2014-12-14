@@ -22,7 +22,12 @@ class StatTask(models.Model):
     number_hosts = models.IntegerField(default=0)
     total_credit = models.FloatField(default=0)
     update_time_db = models.DateTimeField(auto_now=True)
-a
+
+    class Meta:
+        managed = True
+        db_table = 'StatTask'
+        verbose_name = "StatTask"
+        verbose_name_plural = "StatsTask"
 
 
 class Contribute(models.Model):
