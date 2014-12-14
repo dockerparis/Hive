@@ -27,7 +27,7 @@ def list_task(request, pk=None):
     else:
         pk = int(pk)
     tasks = Task.objects.all()
-    return render(request, 'list_task.html', {'tasks': tasks[(pk - 1) * 10: pk * 10], 'current_page': pk, 'number_pages': range(1, tasks.count() / 10  + 1)})
+    return render(request, 'list_task.html', {'tasks': tasks[(pk - 1) * 10: pk * 10], 'current_page': pk, 'number_pages': range(1, tasks.count() / 10  + 2)})
 
 def show_task(request, pk=None):
     try:
