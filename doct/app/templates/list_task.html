@@ -20,8 +20,13 @@
                         </div>
                     </div>
                     <p> {{ task.description|truncatewords:14|slice:"-4"|safe }}... </p>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            <div style="width: 100%; text-align: center;">
+                {% for i in number_pages %}
+                    <a href="/list/{{i}}">{{i}}</a>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
 {% endblock content %}

@@ -14,8 +14,13 @@ from datetime import datetime, timedelta
 def home(request):
     return render(request, 'home.html')
 
-def list_task(request):
-    return render(request, 'list_task.html', {'tasks': Task.objects.all()})
+def list_task(request, pk=None):
+    if pk == None or pk <= 0:
+        pk = 1
+    else:
+        pk = int(pk)
+    tasks = Task.objects.all()
+    return render(request, 'list_task.html', {'tasks': tasks[(pk - 1) * 10: pk * 10], 'number_pages': range(1, tasks.count() / 10 )})
 
 def show_task(request, pk=None):
     try:

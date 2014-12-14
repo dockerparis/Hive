@@ -7,10 +7,45 @@
             <div class="row">
                 <!--<div class="clearfix"></div>-->
                 <h2>{{ task.title }}</h2>
-                <form method="POST" class="post-form">
+                <form method="POST" class="post-form text-center">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="save btn btn-default">Generate configuration</button>
+                    <form method="POST" class="post-form">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="CAjiYIHk5IdW7ZWtrgVjjZewAIMtVOV8">
+                    <div class="row">
+                            <label for="id_ram">RAM:</label> 
+                    </div>
+
+                    <div class="row">
+                            <input id="id_ram" min="0" name="ram" type="number" value="1024">
+                    </div>
+
+                    <br/>
+                    <div class="spacer"></div>
+                    <div class=row>
+                            <br/>
+                            <label for="id_cpu">CPU (number of core):</label>
+                    </div>
+                    <div class="row">
+                            <input id="id_cpu" min="0" name="cpu" type="number" value="2">
+                    </div>
+                        <!--<p>-->
+                        <!--<label for="id_gpu">GPU:</label> <input id="id_gpu" min="0" name="gpu" type="number" value="0">-->
+                        <!--</p>-->
+                    <br/>
+                    <div class="spacer"> </div>
+                    <div class="row">
+                            <label for="id_disk_space">Disk pace (Mo):</label> 
+                    </div>
+                    <div class="row">
+                            <input id="id_disk_space" name="disk_space" type="number" value="1024">
+                    </form>
+                    <div class="row">
+                        <br/>
+                        <div class="spacer"> </div>
+                        <br/>
+                        <br/>
+                        <button type="submit" class="save btn btn-default btn-lg mbutton"> Run container !!! </button>
+                    </div>
                 </form>
 
                 <br/>
