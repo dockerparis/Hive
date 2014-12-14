@@ -52,7 +52,7 @@ fi
 cpu_count=%d
 cpu_shares=1
 memory=%d
-disk=%d
+disk=%dG
 project_url=%s
 volume=/var/lib/docker_boinc
 container_name='test'

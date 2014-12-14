@@ -34,7 +34,7 @@ class Contribute(models.Model):
     ram = models.PositiveIntegerField(default=1024, verbose_name='RAM')
     cpu = models.PositiveIntegerField(default=2, verbose_name='CPU (number of core)')
     # gpu = models.PositiveIntegerField(default=0, verbose_name='GPU')
-    disk_space = models.IntegerField(default=1024, verbose_name='Disk pace (Mo)')
+    disk_space = models.IntegerField(default=10, verbose_name='Disk pace (Go)')
     # email = models.CharField()
     # password = models.CharField()
 
