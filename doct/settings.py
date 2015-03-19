@@ -66,7 +66,7 @@ DATABASES = {
 }
 
 FIXTURE_DIRS = (
-    '/doct/app/migrations/fixtures/',
+    '/doct/app/fixtures/',
 )
 
 # Internationalization
